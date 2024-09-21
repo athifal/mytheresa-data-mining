@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = "mytheresa_project.spiders"
 #USER_AGENT = "mytheresa_project (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -91,3 +91,7 @@ ROBOTSTXT_OBEY = True
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+custom_settings = {
+    'DOWNLOAD_DELAY': 3,  # 2-second delay between requests
+    'DEFAULT_REQUEST_HEADERS': { ... }
+}
