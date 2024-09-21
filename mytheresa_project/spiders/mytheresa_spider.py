@@ -25,20 +25,17 @@ class MyTheresaSpider(scrapy.Spider):
                 yield scrapy.Request(next_page, callback=self.parse)
 
     def parse_product(self, response):
-        self.product_counter += 1  # Increment product counter for each product
-        product_number = self.product_counter  # Store the current product number
+         
         # Extract and yield product details
         breadcrumbs = response.css('div.breadcrumb__item a.breadcrumb__item__link::text').getall()
         product_name = response.css('a.product__area__branding__designer__link::text').get().strip()
         yield {
-            'Product No': product_number,
             'Sl. No': 1,
             'Field Name': 'breadcrumbs',
             'Field Type': 'list',
             'Example': breadcrumbs,
         }
         yield {
-            'Product No': product_number,
             'Sl. No': 2,
             'Field Name': 'product_name',
             'Field Type': 'string',
