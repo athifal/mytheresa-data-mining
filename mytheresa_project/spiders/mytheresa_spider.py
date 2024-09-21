@@ -11,18 +11,10 @@ class MyTheresaSpider(scrapy.Spider):
         for url in product_urls:
             yield response.follow(url, self.parse_product)
 
-        # Extract the total number of pages
-        total_pages = response.css('a.button::attr(href)').re(r'page=(\d+)')
-        if total_pages:
-            max_pages = max(map(int, total_pages))  # Find the highest page number
-
-            # Get the current page number
-            current_page = int(response.url.split('page=')[-1]) if 'page=' in response.url else 1
-
-            # Request the next page if within the total pages
-            if current_page < max_pages:
-                next_page = f"https://www.mytheresa.com/int/en/men/shoes?page={current_page + 1}"
-                yield scrapy.Request(next_page, callback=self.parse)
+        # Extract the "Show more" button URL
+        show_more_url = response.css('div.loadmore__button a.button::attr(href)').get()
+        if show_more_url:
+            yield response.follow(show_more_url, self.parse)
 
     def parse_product(self, response):
          
