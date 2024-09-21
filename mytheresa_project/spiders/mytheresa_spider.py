@@ -15,10 +15,12 @@ class MyTheresaSpider(scrapy.Spider):
             yield response.follow(url, self.parse_product)
 
         # Extract the "Show more" button URL
-        #show_more_url = response.css('div.loadmore__button a.button::attr(href)').get()
-        #if show_more_url:
-            #yield response.follow(show_more_url, self.parse)
 
+        show_more_url = response.css('div.loadmore__button a.button::attr(href)').get()
+        if show_more_url:
+            yield response.follow(show_more_url, self.parse)
+
+       
     def parse_product(self, response):
          
         # Extract and yield product details
