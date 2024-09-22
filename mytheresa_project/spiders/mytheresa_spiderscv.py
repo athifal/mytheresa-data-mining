@@ -1,7 +1,7 @@
 import scrapy
 
 class MyTheresaSpider(scrapy.Spider):
-    name = "mytheresa_spider"
+    name = "mytheresa_spiderscsv"
     allowed_domains = ["mytheresa.com"]
     start_urls = ["https://www.mytheresa.com/int/en/men/shoes"]
 
@@ -13,6 +13,7 @@ class MyTheresaSpider(scrapy.Spider):
         product_urls = response.css('a.item__link::attr(href)').getall()
         for url in product_urls:
             yield response.follow(url, self.parse_product)
+            
 
         # Extract the "Show more" button URL
         show_more_url = response.css('div.loadmore__button a.button::attr(href)').get()
