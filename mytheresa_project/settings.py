@@ -95,3 +95,20 @@ custom_settings = {
     'DOWNLOAD_DELAY': 3,  # 2-second delay between requests
     'DEFAULT_REQUEST_HEADERS': { ... }
 }
+# settings.py
+FEED_EXPORT_FIELDS = [
+    "breadcrumbs",
+    "image_url",
+    "brand",
+    "product_name",
+    "listing_price",
+    "offer_price",
+    "discount",
+    "product_id",
+    "description",
+    "sizes",
+    "other_images"
+]
+
+# Enable pretty-printing with indentation for better readability
+FEED_EXPORT_INDENT = 4
