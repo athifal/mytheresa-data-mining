@@ -33,7 +33,7 @@ class MyTheresaSpider(scrapy.Spider):
         sizes = response.css('div.sizeitem span.sizeitem__label::text').getall()
         description = response.css('div.accordion__body__content > p::text').get()
         description = description.strip() or None
-        image_urls = response.css('div.swiper-slide img::attr(src)').getall()
+        image_urls = response.css('div.swiper-slide img::attr(src)').getall()[1:7]
         product_data = {
             "breadcrumbs": breadcrumbs,
             "image_url": product_image,
@@ -45,7 +45,7 @@ class MyTheresaSpider(scrapy.Spider):
             "product_id": item_number,
             "description":description,
             "sizes": sizes,
-            "other_images": image_urls[1:]
+            "other_images": image_urls
         }
 
         # Yield the product data directly
