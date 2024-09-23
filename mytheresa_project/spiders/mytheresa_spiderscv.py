@@ -9,9 +9,11 @@ class MyTheresaSpider(scrapy.Spider):
     def __init__(self):
         self.product_counter = 1
         self.output_file = 'products.csv'
+
         # Open the CSV file for writing
         self.csv_file = open(self.output_file, 'w', newline='', encoding='utf-8')
         self.csv_writer = csv.writer(self.csv_file)
+
         # Write the header row
         self.csv_writer.writerow(['Sl. No', 'Field Name', 'Field Type', 'Example'])
 
@@ -19,12 +21,12 @@ class MyTheresaSpider(scrapy.Spider):
         product_urls = response.css('a.item__link::attr(href)').getall()
         for url in product_urls:
             yield response.follow(url, self.parse_product)
-              
-
         show_more_url = response.css('div.loadmore__button a.button::attr(href)').get()
         if show_more_url:
             yield response.follow(show_more_url, self.parse)
+
     def parse_product(self, response):
+
         # Extract product details
         description = response.css('div.accordion__body__content > p::text').get()
         description = description.strip() or None  # Extract only the item number
