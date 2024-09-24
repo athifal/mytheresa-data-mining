@@ -111,5 +111,5 @@ FEED_EXPORT_FIELDS = [
 ]
 
 # Enable pretty-printing with indentation for better readability
-FEED_EXPORT_INDENT = 4
+FEED_EXPORT_INDENT = 5
 
